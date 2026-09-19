@@ -1,0 +1,97 @@
+{
+  "id": "86fbc205-2d36-5e9a-9988-29f1be75c4b0",
+  "name": "Facebook Reels → Content monitor",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "7445228e-2a99-586a-8367-4ccbd6fb448d",
+      "name": "When clicking Execute workflow",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Setup\n1. Select your Apify API credential.\n2. Replace the sample public Page URL.\n3. Run manually or replace the trigger with Schedule Trigger.\n4. Connect the final summaries to your content tracker or alert channel.",
+        "height": 260,
+        "width": 440
+      },
+      "id": "9690a620-df32-5a3a-aa10-541634f57449",
+      "name": "How to use this workflow",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -40,
+        -220
+      ]
+    },
+    {
+      "parameters": {
+        "workflow": "profiles",
+        "profileUrls": "https://www.facebook.com/nike",
+        "maxReelsPerProfile": 200,
+        "maxResults": 200,
+        "outputPreset": "engagement",
+        "downloadMp4": false,
+        "includeTranscript": true,
+        "dedupe": true
+      },
+      "id": "c6a5e2b2-f102-522a-9ab1-1319d0b7d2a8",
+      "name": "Collect public Reels with Apify",
+      "type": "n8n-nodes-apivault-facebook-reels.facebookReels",
+      "typeVersion": 1,
+      "position": [
+        260,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "const j = $json; const views = Number(j.viewCount ?? j.views ?? 0); const reactions = Number(j.reactionCount ?? j.reactions ?? 0); const comments = Number(j.commentCount ?? 0); return { json: { ...j, engagementTotal: reactions + comments, contentSummary: { creator: j.creatorName ?? '', caption: j.caption ?? '', views, reactions, comments, videoUrl: j.url ?? j.videoUrl ?? '' } } };"
+      },
+      "id": "c2a9ba0d-c5ae-538f-afc9-5f51eb11067f",
+      "name": "Build content summary",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        560,
+        120
+      ]
+    }
+  ],
+  "connections": {
+    "When clicking Execute workflow": {
+      "main": [
+        [
+          {
+            "node": "Collect public Reels with Apify",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Collect public Reels with Apify": {
+      "main": [
+        [
+          {
+            "node": "Build content summary",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "active": false,
+  "versionId": "7d6921af-d7aa-5266-b05d-105d92fc29bc",
+  "tags": []
+}
