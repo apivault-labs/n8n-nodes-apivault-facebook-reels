@@ -54,3 +54,15 @@ The package is free. Actor runs are billed by Apify using the pricing shown on t
 ## License
 
 MIT. The hosted Actor is a separate paid service governed by Apify terms.
+
+<!-- apivault-integrations:start -->
+## Hosted Actor and integrations
+
+- [Run Facebook Reels Scraper — No Login, Bulk Video API on Apify](https://apify.com/apivault_labs/facebook-reels-video-scraper).
+- [Current pricing and usage terms](https://apify.com/apivault_labs/facebook-reels-video-scraper/pricing).
+- [n8n community package: n8n-nodes-apivault-facebook-reels](https://www.npmjs.com/package/n8n-nodes-apivault-facebook-reels).
+- [Python client](https://github.com/apivault-labs/facebook-reels-video-scraper-python).
+- [n8n source and usage](https://github.com/apivault-labs/apivault-labs/tree/main/community-nodes/n8n-nodes-apivault-facebook-reels).
+
+An Apify account and API token are required. Hosted Actor/platform charges apply. npm publication is not n8n verification or confirmation of n8n Cloud availability.
+<!-- apivault-integrations:end -->
